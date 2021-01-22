@@ -19,8 +19,7 @@ public class ProductController {
         return productRepository.findAll();
     }
 
-    @GetMapping
-    @RequestMapping("{id}")
+    @GetMapping("/{id}")
     public Product get(@PathVariable Long id) {
         return productRepository.getOne(id);
     }

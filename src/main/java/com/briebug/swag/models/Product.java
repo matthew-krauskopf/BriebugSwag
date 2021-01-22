@@ -1,25 +1,31 @@
 package com.briebug.swag.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "products")
 public class Product {
     @Id
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @NotNull
     private String name;
+
+    @NotNull
     private Float cost;
+
+    @Min(0)
     private Integer stock;
 
-    public Product() {
-        this.id = null;
-        this.name = null;
-        this.cost = null;
-        this.stock = null;
-    }
+    public Product () {}
 
-    public Product(Integer id, String name, Float cst, Integer stock) {
-        this.id = id;
+    public Product(String name, Float cst, Integer stock) {
         this.name = name;
         this.cost = cst;
         this.stock = stock;
@@ -29,11 +35,11 @@ public class Product {
         return String.format("ID: %d | Name: %s | Cost: $%.2f | Stock: %d ", id, name, cost, stock);
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -59,5 +65,12 @@ public class Product {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Boolean equals(Product product) {
+        return ((name.equals(product.getName())) &&
+                (id.equals(product.getId())) &&
+                (cost.equals(product.getCost())) &&
+                (stock.equals(product.getStock())));
     }
 }

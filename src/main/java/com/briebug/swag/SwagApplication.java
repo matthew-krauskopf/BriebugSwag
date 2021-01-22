@@ -18,30 +18,6 @@ public class SwagApplication {
 		SpringApplication.run(SwagApplication.class, args);
 	}
 
-	//@Autowired
-	//ProductRepository products;
-
-	@Bean
-	public CommandLineRunner demo (ProductRepository products) {
-		return (args) -> {
-			Product whizz = new Product(4, "CheezeWizz", 3.99f, 2);
-			Product hat = new Product(2, "Hats", 10.99f, 5);
-			printCatalog(products);
-			products.save(whizz);
-			printCatalog(products);
-			products.save(hat);
-			printCatalog(products);
-			products.delete(hat);
-			printCatalog(products);
-
-			Product bought = products.findByName(whizz.getName());
-			bought.setStock(bought.getStock()-1);
-			products.save(bought);
-			printCatalog(products);
-
-		};
-	}
-
 	public void printCatalog(ProductRepository repo) {
 		System.out.println("************Start************************");
 		for (Product ans : repo.findAll()) {

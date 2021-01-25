@@ -31,6 +31,13 @@ public class Product {
         this.stock = stock;
     }
 
+    public Product(Long id, String name, Float cst, Integer stock) {
+        this.id = id;
+        this.name = name;
+        this.cost = cst;
+        this.stock = stock;
+    }
+
     public String toString() {
         return String.format("ID: %d | Name: %s | Cost: $%.2f | Stock: %d ", id, name, cost, stock);
     }

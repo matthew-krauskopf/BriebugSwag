@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DataLoader implements CommandLineRunner {
 
-    private ProductRepository product_repo;
+    private final ProductRepository product_repo;
 
     public DataLoader(ProductRepository pr) {
         product_repo = pr;

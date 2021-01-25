@@ -2,43 +2,45 @@ package com.briebug.swag.controllers;
 
 import com.briebug.swag.models.Product;
 import com.briebug.swag.repositories.ProductRepository;
+import com.briebug.swag.services.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @GetMapping
     public List<Product> list() {
-        return productRepository.findAll();
+        return productService.list();
     }
 
     @GetMapping("/{id}")
-    public Product get(@PathVariable Long id) {
-        return productRepository.getOne(id);
+    public Optional<Product> get(@PathVariable Long id) {
+        return productService.getById(id);
     }
 
     @PostMapping
-    public Product create(@RequestBody final Product product) {
-        return productRepository.saveAndFlush(product);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void create(@RequestBody final Product product) {
+        productService.create(product);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
-        productRepository.deleteById(id);
+        productService.deleteById(id);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public Product update(@PathVariable Long id, @RequestBody Product product) {
-        Product existingProduct = productRepository.getOne(id);
-        BeanUtils.copyProperties(product, existingProduct, "id");
-        return productRepository.saveAndFlush(existingProduct);
+    public void update(@PathVariable Long id, @RequestBody Product product) {
+        productService.updateById(product, id);
     }
 
 }

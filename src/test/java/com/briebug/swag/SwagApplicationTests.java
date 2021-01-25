@@ -9,5 +9,4 @@ class SwagApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

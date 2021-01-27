@@ -3,10 +3,12 @@ package com.briebug.swag;
 import com.briebug.swag.models.Product;
 import com.briebug.swag.repositories.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class DataLoader implements CommandLineRunner {
 
     private final ProductRepository product_repo;

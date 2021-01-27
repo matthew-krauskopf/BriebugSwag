@@ -3,6 +3,7 @@ package com.briebug.swag.services;
 import com.briebug.swag.models.Product;
 import com.briebug.swag.repositories.ProductRepository;
 import com.briebug.swag.exception.ResourceNotFoundException;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ProductServiceImpl implements ProductService {
         this.product_repo = product_repo;
     }
 
+    @Cacheable("full-catalog")
     public List<Product> list() {
         return product_repo.findAll();
     }
@@ -36,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
         product_repo.save(product);
     }
 
+    @Cacheable("products")
     public Optional<Product> get(Long id) {
         return product_repo.findById(id);
     }

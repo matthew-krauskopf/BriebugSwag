@@ -6,11 +6,13 @@ import com.briebug.swag.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/products")
 public class ProductController {
     @Autowired
@@ -18,6 +20,7 @@ public class ProductController {
 
     @GetMapping
     public List<Product> list() { return productService.list(); }
+
 
     @GetMapping("/{id}")
     public Product get(@Valid @PathVariable Long id) {

@@ -20,7 +20,7 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String [] args) throws Exception {
         List<Product> products = new ArrayList<>();
-        products.add(new Product("CheezeWizz", 3.99f, 2));
+        products.add(new Product("Stickers", 3.99f, 2));
         products.add(new Product("Hats", 10.99f, 5));
         products.add(new Product("Shirts", 20.98f, 10));
 
